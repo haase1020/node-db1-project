@@ -29,4 +29,48 @@ router.get('/:id', (req,res) =>{
     });
 });
 
+router.post('/', (req,res) => {
+    db('accounts')
+    .insert(req.body, 'id')
+    .then(ids=> {
+        res.status(201).json({ results: ids });
+    })
+    .catch(error => {
+        res.status(500).json({ message: "sorry charlie" })
+    });
+});
+
+router.put('/:id', (req,res) => {
+    const changes = req.body;
+    db('accounts')
+    .where({ id: req.params.id })
+    .update(changes)
+    .then(count => {
+        if(count > 0) {
+            res.status(200).json({ message: 'successful' });
+        } else {
+            res.status(404).json({ message: 'not found' });
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ errorMessage: "you have problems" })
+    });
+});
+
+router.delete('/:id', (req,res) => {
+    db('posts')
+    .where({ id:req.params.id })
+    .del()
+    .then(count => {
+        if(count>0) {
+            res.status(200).json({ message: 'record deleted'})
+        } else {
+            res.status(404).json({ message: 'problems' })
+        }
+    })
+    .catch(error => {
+        res.status(500).json({ message: 'problems' })
+    })
+});
+
 module.exports = router;

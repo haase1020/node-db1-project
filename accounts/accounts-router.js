@@ -58,7 +58,7 @@ router.put('/:id', (req,res) => {
 });
 
 router.delete('/:id', (req,res) => {
-    db('posts')
+    db('accounts')
     .where({ id:req.params.id })
     .del()
     .then(count => {

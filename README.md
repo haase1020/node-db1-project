@@ -1,6 +1,6 @@
 # Database Queries March 16, 2020
 
-## Topics
+## Topics March 16, 2020
 
 - Relational Databases
 - Writing Basic SQL Queries
